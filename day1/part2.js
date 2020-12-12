@@ -16,8 +16,9 @@ rl.on('line', (line) => {
 rl.on('close', () => {
   // Sort array once populated
   arr.sort((a,b) => a-b)
-
+  // Initialize flag to stop iterations
   let success = false;
+  // Track iteration count
   let count=0;
 
   for(let i=0; i<arr.length; i++) {
@@ -25,15 +26,20 @@ rl.on('close', () => {
         break;
     }
     for(let j=i+1; j<arr.length; j++) {
+      if(success) {
+        break;
+      }
+      for(let k=j+1; k<arr.length; k++){
         count++;
-        if(arr[i] + arr[j] === 2020) {
-            console.log(`Numbers are ${arr[i]} and ${arr[j]}, their product is ${arr[i] * arr[j]}.  It took ${count} iterations.`);
+        if(arr[i] + arr[j] + arr[k] === 2020) {
+            console.log(`Numbers are ${arr[i]} and ${arr[j]} and ${arr[k]}, their product is ${arr[i] * arr[j] * arr[k]}.  It took ${count} iterations.`);
             success = true;
             break;
         }
         if(arr[i] + arr[j] > 2020) {
             break;
         }
+      }
     }
   }
   
